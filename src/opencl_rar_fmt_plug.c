@@ -284,6 +284,9 @@ static void init(struct fmt_main *_self)
 
 static void reset(struct db_main *db)
 {
+	split_size = 0;
+	MEM_FREE(split_blob);
+
 	if (!autotuned) {
 		char build_opts[64];
 

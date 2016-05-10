@@ -170,6 +170,12 @@ static void init(struct fmt_main *self)
 	}
 }
 
+static void reset(struct db_main *db)
+{
+	split_size = 0;
+	MEM_FREE(split_blob);
+}
+
 static void done(void)
 {
 	MEM_FREE(aes_iv);

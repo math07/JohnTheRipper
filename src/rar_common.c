@@ -370,17 +370,17 @@ static char* split(char *ciphertext, int index, struct fmt_main *self)
 	char *d, *p = strrchr(ciphertext, '*');
 	size_t len = p - ciphertext;
 
+	MEM_FREE(split_blob);
+
 	if (ciphertext[7] != '2' || ldr_in_pot)
 		return ciphertext;
-
-	MEM_FREE(split_blob);
 
 	split_size = strlen(++p) * 3 / 4;
 	split_blob = d = mem_alloc(split_size);
 	base64_convert(p, e_b64_mime, split_size * 4 / 3,
 	               d, e_b64_raw, split_size, flg_Base64_NO_FLAGS);
-	assert(len < sizeof(out));
 
+	assert(len < sizeof(out));
 	strnzcpy(out, ciphertext, len + 1);
 
 	return out;
